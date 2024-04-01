@@ -97,6 +97,26 @@ function startFeedStatusUpdates(io) {
   }, 5000); // Update feed status every 5 seconds
 }
 
+function startFeedStatusUpdates_OnlyTriggerWhenClientRequired(io) {
+  io.on('connection', async (socket) => {
+    console.log('Client connected');
+    
+    const intervalId = setInterval(async () => {
+      try {
+        const feedStatus = await getFeedStatus();
+        socket.emit('feedStatusUpdate', feedStatus);
+      } catch (error) {
+        console.error('Error fetching feed status:', error.message);
+      }
+    }, 5000); // Update feed status every 5 seconds
+
+    socket.on('disconnect', () => {
+      console.log('Client disconnected');
+      clearInterval(intervalId);
+    });
+  });
+}
+
 module.exports = {
   startFeedStatusUpdates,
 };
