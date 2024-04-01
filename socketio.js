@@ -117,6 +117,28 @@ function startFeedStatusUpdates_OnlyTriggerWhenClientRequired(io) {
   });
 }
 
+function startFeedStatusUpdates(io) {
+  io.on('connection', async (socket) => {
+    console.log('Client connected');
+
+    // Receive feedStatusUpdate event with pagination parameters
+    socket.on('feedStatusUpdate', async (paginationParams) => {
+      const { pageNumber, pageSize } = paginationParams;
+      
+      try {
+        const feedStatus = await getFeedStatus(pageNumber, pageSize);
+        socket.emit('feedStatusUpdate', feedStatus);
+      } catch (error) {
+        console.error('Error fetching feed status:', error.message);
+      }
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Client disconnected');
+    });
+  });
+}
+
 module.exports = {
   startFeedStatusUpdates,
 };
