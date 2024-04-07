@@ -1,3 +1,4 @@
+
 //app.js
 
 const express = require('express');
@@ -180,4 +181,32 @@ socket.on('connect', () => {
 
 socket.on('disconnect', () => {
   console.log('Disconnected from server');
+});
+
+//cors
+
+npm install cors
+
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const cors = require('cors'); // Import the cors middleware
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Enable CORS for all requests
+app.use(cors());
+
+const corsOptions = {
+  origin: 'http://example.com' // Change this to your React.js app's origin
+};
+
+//app.use(cors(corsOptions));
+
+// Your other middleware and route handlers...
+
+server.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
