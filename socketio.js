@@ -236,3 +236,20 @@ function findDifference(previousData, newData) {
     const removed = previousData.filter(item => !newData.includes(item));
     return { added, removed };
 }
+
+// Function to find difference between previous and current data
+function findDifferenceJson(previousData, newData) {
+    // Compare the JSON objects to find differences
+    // For simplicity, let's assume previousData and newData are both JSON objects
+    const difference = {};
+
+    // Iterate over keys in newData
+    for (const key in newData) {
+        if (newData.hasOwnProperty(key)) {
+            // Check if the key exists in previousData
+            if (!previousData.hasOwnProperty(key) || previousData[key] !== newData[key]) {
+                // Add key-value pair to difference object
+                difference[key] = newData[key];
+            }
+        }
+    }
