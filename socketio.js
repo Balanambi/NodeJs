@@ -210,3 +210,29 @@ const corsOptions = {
 server.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
+
+//Find Difference
+
+let previousData = null;
+
+// Socket.IO event listener
+socket.on('data', (newData) => {
+    // Check if previous data is available
+    if (previousData !== null) {
+        // Compare previous data with new data
+        const difference = findDifference(previousData, newData);
+        console.log('Difference:', difference);
+    }
+
+    // Update previous data with new data
+    previousData = newData;
+});
+
+// Function to find difference between previous and current data
+function findDifference(previousData, newData) {
+    // Example logic to find difference (custom to your data structure)
+    // For demonstration, let's assume newData is an array of numbers
+    const added = newData.filter(item => !previousData.includes(item));
+    const removed = previousData.filter(item => !newData.includes(item));
+    return { added, removed };
+}
