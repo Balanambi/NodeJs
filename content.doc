@@ -1,0 +1,112 @@
+
+[Page 1: Title Slide]
+Introducing Our Real-Time Feed Dashboard
+
+Welcome to the demo of our Real-Time Feed Dashboard.
+Empowering transparency, collaboration, and efficiency.
+
+[Page 2: Overview & Features]
+
+Overview:
+
+Our Real-Time Feed Dashboard revolutionizes how we monitor and manage feeds.
+Provides real-time insights into feed statuses and progress.
+Enhances communication and collaboration among teams.
+Key Features:
+
+Categorization of feeds based on status.
+Detailed feed view with steps and logs.
+Interactive forum for discussions and queries.
+Notification system for timely updates.
+Powerful search functionality for easy information retrieval.
+
+[Page 3: Technical Details]
+
+Technical Architecture:
+
+Backend Project: Developed using Node.js with Socket.IO for real-time updates and SQL Server for data storage.
+Frontend Project: Created with React.js, accessing the Node.js endpoint to retrieve data.
+Responsive Web Design: Utilizing the latest versions of web technologies to ensure compatibility across devices.
+Backend Technologies:
+
+Node.js: Leveraged for its event-driven architecture and scalability.
+Socket.IO: Used for real-time bidirectional communication between the server and clients.
+SQL Server: Chosen for its robustness and reliability in handling data storage and retrieval.
+Frontend Technologies:
+
+React.js: Selected for its component-based architecture and efficient rendering.
+Axios: Employed for making HTTP requests to the Node.js backend.
+Material-UI: Utilized for building a responsive and visually appealing user interface.
+Integration and Deployment:
+
+Continuous Integration/Continuous Deployment (CI/CD) pipelines implemented for automated testing and deployment.
+Docker containers utilized for containerization, ensuring consistency across different environments.
+Deployed on cloud infrastructure for scalability and reliability.
+
+
+[Speech]
+Ladies and gentlemen,
+
+Today, I'm thrilled to showcase to you our latest innovation: the Real-Time Feed Dashboard. This dashboard represents a significant step forward in how we monitor and manage our feeds, bringing transparency, collaboration, and efficiency to the forefront of our operations.
+
+At its core, the Real-Time Feed Dashboard provides us with instant insights into the status and progress of our feeds. Through intuitive categorization and live updates, we can easily identify feeds that require attention and take proactive measures to ensure their success.
+
+One of the standout features of this dashboard is its ability to provide a detailed view of each feed, including its steps and logs. This level of granularity empowers us to pinpoint issues quickly, streamline troubleshooting, and accelerate resolution times.
+
+Furthermore, the inclusion of an interactive forum within the dashboard fosters collaboration among team members. Here, questions can be raised, insights shared, and discussions facilitated—all in real-time. Our AD team and prod support team are actively engaged in this forum, providing timely assistance and guidance whenever needed.
+
+To ensure that critical discussions are not missed, we've implemented a notification system that alerts relevant teams via email whenever a new comment is posted. This promotes responsiveness and ensures that issues are addressed promptly.
+
+Finally, the dashboard boasts a powerful search functionality, enabling users to effortlessly retrieve information from within the feed descriptions and comments. This not only saves time but also facilitates knowledge sharing and documentation.
+
+In conclusion, our Real-Time Feed Dashboard is more than just a tool; it's a game-changer. It empowers us to make data-driven decisions, fosters collaboration, and drives efficiency across our operations. I invite you to explore the dashboard firsthand and witness the transformative impact it can have on our workflow.
+
+Thank you for your attention. Let's embark on this journey of innovation together.
+
+[Slide 1: Title]
+Introducing Our Real-Time Feed Dashboard
+
+[Slide 2: Overview]
+
+Welcome everyone, today I'm thrilled to present to you our latest innovation: the Real-Time Feed Dashboard.
+This dashboard provides a comprehensive view of all our feeds, their statuses, and their progress in real-time.
+It's designed to enhance transparency, streamline communication, and empower our teams to make data-driven decisions.
+[Slide 3: Dashboard Overview]
+
+Here's a glimpse of our dashboard. As you can see, it's divided into three categories, each showcasing the status of feeds: Not Started, Completed, In Progress, and Failed.
+The live progress of each feed is displayed, giving us instant insights into their performance.
+By default, the dashboard shows feeds for today, but we can easily navigate to view historical data as well.
+[Slide 4: Detailed Feed View]
+
+Clicking on a feed provides a detailed view, including its steps and logs. This level of granularity allows us to pinpoint issues quickly and take necessary actions.
+Additionally, we've incorporated a forum button for each feed. Clicking on it reveals a drawer on the right-hand side.
+[Slide 5: Forum Functionality]
+
+The drawer showcases the feed's description and rules, ensuring everyone is aligned with its objectives.
+More importantly, it features a comment section where team members can raise questions or provide insights.
+Our AD team and prod support team are actively engaged here, responding promptly to inquiries and providing assistance as needed.
+[Slide 6: Notification System]
+
+We've implemented a notification system that alerts relevant teams via email whenever a new comment is posted.
+This ensures that critical discussions are not missed, promoting collaboration and problem-solving in real-time.
+[Slide 7: Search Functionality]
+
+The dashboard also boasts a powerful search feature within the forum block.
+Users can search for specific keywords or topics within the feed description and comments, making information retrieval effortless.
+[Slide 8: Benefits]
+
+Let's recap the benefits of our Real-Time Feed Dashboard:
+Enhanced visibility and transparency.
+Improved communication and collaboration.
+Rapid issue identification and resolution.
+Efficient knowledge sharing and documentation.
+Empowerment through data-driven decision-making.
+[Slide 9: Conclusion]
+
+In conclusion, our Real-Time Feed Dashboard is not just a tool; it's a catalyst for driving efficiency and excellence in our operations.
+With its intuitive interface, powerful features, and real-time capabilities, it's poised to revolutionize how we manage and monitor our feeds.
+I invite you to explore the dashboard firsthand and experience the transformative impact it can have on our workflow.
+Thank you for your attention.
+[Slide 10: Q&A]
+
+Now, I'm open to any questions or feedback you may have. Let's dive into a discussion about our Real-Time Feed Dashboard.
