@@ -110,3 +110,20 @@ Thank you for your attention.
 [Slide 10: Q&A]
 
 Now, I'm open to any questions or feedback you may have. Let's dive into a discussion about our Real-Time Feed Dashboard.
+
+
+
+
+In our dashboard, we have two distinct blocks. The top block serves as the status counter, offering a quick glance at the count of package statuses for each of our systems. 
+
+As part of the billing team, we heavily rely on feed data originating from various upstream sources. These feeds contain crucial information integral to our processes. To streamline our operations, we've segmented our workflow into three systems: Infomine, Billing, and VH. Consequently, we manage packages across three separate websites. 
+
+Within this block, you'll find five boxes, each representing a different status type, along with its corresponding count. This allows users to not only see the individual status counts for each system but also the aggregated counts within each box.
+
+This real-time dashboard is particularly beneficial for our production support team. By simply referring to this dashboard, they can effortlessly track today's package executions, identifying how many packages have failed, which ones are currently running, and more. This immediate access to status updates enables prompt action on any failures, ultimately reducing operational noise and enhancing efficiency. Moreover, users need not manually refresh the page for the latest updates, as the dashboard automatically updates as soon as new data is available in the database.
+
+To achieve this real-time functionality, we've leveraged Socket.IO technology. This enables seamless communication between the server and clients, ensuring that updates are propagated to the dashboard instantly upon data changes.
+
+Now, let's delve into the bottom block, where Afrin will provide an overview of the detailed package view. Afrin, over to you.
+
+
