@@ -154,3 +154,149 @@ class SocketManager {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+// Modified SocketManager to use connection pool
+class SocketManager {
+  constructor(httpServer, dbConfig) {
+    this.io = new Server(httpServer, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+      }
+    });
+    
+    this.connectionPool = new ConnectionPool(dbConfig);
+    this.activeSubscriptions = new Map();
+    this.queryIntervals = new Map();
+  }
+
+  async initialize() {
+    logger.info('Initializing Socket Manager');
+    await this.connectionPool.initialize();
+    
+    this.io.on('connection', (socket) => {
+      const clientId = socket.id;
+      logger.info('Client connected', { clientId });
+
+      // Handle real-time query subscriptions
+      socket.on('subscribeToQuery', async (data) => {
+        const { queryId, query, parameters = [], interval = 5000 } = data;
+        
+        logger.info('New query subscription', { 
+          clientId, 
+          queryId, 
+          interval 
+        });
+
+        const intervalId = setInterval(async () => {
+          let connection;
+          try {
+            // Get connection from pool
+            connection = await this.connectionPool.getConnection();
+            const dbOperations = new DatabaseOperations(connection);
+            
+            const results = await dbOperations.executeQuery(query, parameters);
+            socket.emit(`queryUpdate:${queryId}`, { 
+              queryId, 
+              timestamp: new Date(),
+              data: results 
+            });
+          } catch (err) {
+            logger.error('Error in query subscription', err, { queryId });
+            socket.emit(`queryError:${queryId}`, { 
+              queryId,
+              error: err.message 
+            });
+          } finally {
+            if (connection) {
+              this.connectionPool.releaseConnection(connection);
+            }
+          }
+        }, interval);
+
+        this.queryIntervals.set(queryId, intervalId);
+        this.activeSubscriptions.set(queryId, { socket, query, parameters });
+
+        // Execute immediately for initial data
+        let connection;
+        try {
+          connection = await this.connectionPool.getConnection();
+          const dbOperations = new DatabaseOperations(connection);
+          const results = await dbOperations.executeQuery(query, parameters);
+          socket.emit(`queryUpdate:${queryId}`, { 
+            queryId, 
+            timestamp: new Date(),
+            data: results 
+          });
+        } catch (err) {
+          logger.error('Error in initial query execution', err, { queryId });
+        } finally {
+          if (connection) {
+            this.connectionPool.releaseConnection(connection);
+          }
+        }
+      });
+
+      // Handle stored procedure executions similarly
+      socket.on('executeStoredProcedure', async (data) => {
+        const { requestId, procedureName, parameters = [] } = data;
+        let connection;
+        
+        try {
+          connection = await this.connectionPool.getConnection();
+          const dbOperations = new DatabaseOperations(connection);
+          
+          const results = await dbOperations.executeStoredProcedure(
+            procedureName, 
+            parameters
+          );
+          socket.emit(`procedureResult:${requestId}`, { 
+            requestId, 
+            data: results 
+          });
+        } catch (err) {
+          logger.error('Error executing stored procedure', err, { 
+            requestId, 
+            procedureName 
+          });
+          socket.emit(`procedureError:${requestId}`, { 
+            requestId, 
+            error: err.message 
+          });
+        } finally {
+          if (connection) {
+            this.connectionPool.releaseConnection(connection);
+          }
+        }
+      });
+
+      // Other event handlers remain the same...
+    });
+  }
+
+  async close() {
+    // Clear all intervals
+    for (const intervalId of this.queryIntervals.values()) {
+      clearInterval(intervalId);
+    }
+    
+    // Close all database connections
+    await this.connectionPool.closeAll();
+    
+    // Close socket server
+    if (this.io) {
+      this.io.close();
+    }
+    
+    logger.info('Socket Manager closed');
+  }
+}
